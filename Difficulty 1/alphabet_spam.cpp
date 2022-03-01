@@ -13,7 +13,7 @@ int main() {
             lower++;
         } else if (isupper(c)) {
             upper++;
-        } else if (c == ' ') {
+        } else if (c == '_') {
             space++;
         } else {
             symbols++;
