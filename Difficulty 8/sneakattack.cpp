@@ -13,6 +13,5 @@ int main() {
         angle = atan((y1-y2) / (x1-x2));
 
         
-
     }
 }
