@@ -14,6 +14,7 @@ int main() {
         }
         else {
             if(prev == 'a' && c == 'e') occ++;
+            prev = c;
         }
     }
     if (occ/words >= 0.4) cout << "dae ae ju traeligt va";
