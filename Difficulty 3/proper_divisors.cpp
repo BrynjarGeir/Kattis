@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <signal.h>
 using namespace std;
 
 int sum_factors(int n) {
@@ -14,8 +15,8 @@ int sum_factors(int n) {
 
 int main() {
     int b = 500;
+    double n;
     while(b--) {
-        double n;
         cin >> n;
         int sum_o_factors = sum_factors(n);
         if (sum_o_factors == n) cout << n << " perfect" << endl;
