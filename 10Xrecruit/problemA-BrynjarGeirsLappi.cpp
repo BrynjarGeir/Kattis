@@ -6,7 +6,7 @@ int main() {
     int n, r;
     cin >> n;
     while(n != 0) {
-        r = floor(sqrt(n));
+        r = sqrt(n);
         cout << ((n - r) / r) - 1 + r << endl;
         cin >> n;
     }
