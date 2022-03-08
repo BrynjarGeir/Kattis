@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-    int m, n;
-    double r, degree, minutes, seconds;
+    int m;
+    double r, n, degree, minutes, seconds;
     cin >> m;
     cout << fixed;
 
@@ -18,23 +18,22 @@ int main() {
             cout << area;
         } else if(n*degree < 360) {
             double theta_area = (degree/360) * M_PI * r * r;
-            double left_area = ((360 - n*degree)/360) * M_PI * r * r;
+            double left_area = ((360 - n*degree + degree)/360) * M_PI * r * r;
             cout << max(theta_area, left_area);
         } else {
-            double cuts[n+1];
+            double cuts[(int)n];
             double d = 0;
-            for(int j = 0; j <= n; j++) {
+            for(int j = 0; j < (int)n; j++) {
                 cuts[j] = d;
                 d += degree;
                 if(d >= 360) d -= 360;
             }
-            sort(cuts, cuts + n + 1);
+            sort(cuts, cuts + (int)n);
             double max_difference = -1;
-            for(int j = 0; j < n; j++) {
+            for(int j = 0; j < n-1; j++) {
                 max_difference = max(max_difference, cuts[j+1] - cuts[j]);
             }
-            max_difference = max(max_difference, 360-cuts[n] + cuts[0]);
-
+            max_difference = max(max_difference, 360-cuts[(int)n-1]);
             cout << (max_difference/360) * M_PI * r * r;
         }
 
