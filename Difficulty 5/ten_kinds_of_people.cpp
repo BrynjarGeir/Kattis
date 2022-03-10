@@ -59,7 +59,7 @@ int main()  {
     for(int i = 0; i < n; i++) {
         getline(cin, line);
         isstringstream ss(line);
-        ss >> r1, ss > c1, ss >> r2, ss >> c2;
+        ss >> r1, ss >> c1, ss >> r2, ss >> c2;
         if(grid[r1][c1] != grid[r2][c2]) cout << "neither" << endl;
         else {
             bool visited[r][c];
