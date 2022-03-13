@@ -1,26 +1,29 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 int main() {
     int n;
     cin >> n;
-    int days[n];
+    vector<int> days(n);
 
     for(int i = 0; i < n; i++) {
         cin >> days[i];
     }
 
-    sort(days, days+n);
-    int day = 0;
-    for(int i = n-1; i >= 0; i--) {
-        days[i] -= i;
-        day++;
+    sort(days.begin(), days.end());
+
+    int longest = days[0], ans = 1;
+
+    for(int i = 1; i < n; i++) {
+        longest--, ans++;
+        if(longest < days[i]) {
+            longest = days[i];
+        }
     }
 
-    bool some_none_zero = true;
+    ans += longest;
 
-    cout << day;
-
-
+    cout << ans + 1;
 }
