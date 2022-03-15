@@ -1,21 +1,18 @@
 #include <iostream>
-#include <set>
+#include <string>
+
 using namespace std;
 
 int main() {
-    set<char> vowels{'a','e','i','o','u'};
-    string line, new_line = "";
-    getline(cin, line);
+    string s, t;
+    getline(cin,s);
 
-    for(int i = 0; i < line.size()-1; i++) {
-        if(line.at(i) == 'p' && i != 0 && line.at(i-1) == line.at(i+1) && vowels.find(line.at(i-1)) != vowels.end()) {
-            i++;
-            continue;
+    for(int i = 0; i < s.size(); i++) {
+        if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u') {
+            i += 2;
         }
-
-        new_line += line.at(i);
+        t.push_back(s[i]);
     }
 
-    cout << new_line;
-
+    cout << t << endl;
 }

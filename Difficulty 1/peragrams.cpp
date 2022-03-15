@@ -1,40 +1,22 @@
 #include <iostream>
-#include <map>
+#include <vector>
 using namespace std;
 
 int main() {
-    string word;
-    map<char, int> m;
-    cin >> word;
+    string s;
+    cin >> s;
+    vector<int> characters(26,0);
 
-    if (word.empty()) {
-        cout << 0;
-        return 0;
-    }
-    
-    for(char c: word) {
-        if(m.find(c) != m.end()) {
-            m[c]++;
-        } else {
-            m[c] = 1;
-        }
-    }
-    int counter = 0;
-    if(word.size() % 2 == 0) {
-        map<char, int>::iterator it;
-        for(it = m.begin(); it != m.end(); it++) {
-            if(it->second % 2 == 0) continue;
-            else counter++;
-        }
-    } else {
-        map<char, int>::iterator it;
-        bool first = true;
-        for(it = m.begin(); it != m.end(); it++) {
-            if(it->second % 2 == 0) continue;
-            else if(first) first = false;
-            else counter++; 
-        }
+    for(char c: s) {
+        characters[c-'a']++;
     }
 
-    cout << counter;
+    int odds = 0;
+
+    for(int c: characters) {
+        if(c % 2 != 0) odds++;
+    }
+
+    if(odds > 0) cout << odds - 1;
+    else cout << odds;
 }

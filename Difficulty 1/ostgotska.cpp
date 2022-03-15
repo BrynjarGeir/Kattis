@@ -2,21 +2,17 @@
 using namespace std;
 
 int main() {
-    string sentence;
-    getline(cin, sentence);
-    char prev = 'A';
-    double occ = 0, words = 1;
-    for(char c: sentence) {
-        if(prev == 'A') prev = c;
-        else if (c == ' ') {
-            words++;
-            prev = 'A';
-        }
-        else {
-            if(prev == 'a' && c == 'e') occ++;
-            prev = c;
+    string word;
+    double words = 0, occ = 0;
+    while(cin >> word) {
+        words++;
+        for(int i = 0; i < word.size()-1; i++) {
+            if(word.at(i) == 'a' && word.at(i+1) == 'e') {
+                occ++;
+                break;
+            }
         }
     }
-    if (occ/words >= 0.4) cout << "dae ae ju traeligt va";
+    if (words == 0 || occ/words >= 0.4) cout << "dae ae ju traeligt va";
     else cout << "haer talar vi rikssvenska";
 }

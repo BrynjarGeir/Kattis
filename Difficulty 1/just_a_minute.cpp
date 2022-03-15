@@ -3,8 +3,8 @@
 using namespace std;
 
 int main() {
-    long double N, M, S, ans;
-    long double measured = 0, showed = 0;
+    double N, M, S, ans;
+    double measured = 0, showed = 0;
 
     cin >> N;
 
@@ -15,5 +15,6 @@ int main() {
         showed += S;
     }
     ans = measured / showed;
-    cout << fixed << setprecision(10) << ans;
+    if(ans > 1) cout << fixed << setprecision(10) << ans;
+    else cout << "measurement error";
 }

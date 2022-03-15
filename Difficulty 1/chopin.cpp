@@ -1,19 +1,27 @@
-#include <iostream>
-#include <map>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    string note;
-    int case_number = 1;
-    map<string, string> alternate_keys = {{"Ab minor", "G# minor"}, {"A# major", "Bb major"}, {"A# minor", "Bb minor"}, {"C# major", "Db major"}, {"Db minor", "C# minor"}, {"D# major", "Eb major"}, {"D# minor", "Eb minor"}, {"Gb major", "F# major"}, {"Gb minor", "F# minor"}, {"G# major", "Ab major"}};
-
-    while(getline(cin, note) && case_number != 6) {
-        if (note.empty()) break;
-        if (alternate_keys.find(note) != alternate_keys.end()) {
-           cout << "Case " << case_number << ": " << alternate_keys[note] << endl;;
-        } else {
-            cout << "Case " << case_number << ": UNIQUE" << endl; 
-        }
-        case_number++;
+  map<string, string> notes;
+  notes["A#"] = "Bb";
+  notes["Bb"] = "A#";
+  notes["C#"] = "Db";
+  notes["Db"] = "C#";
+  notes["D#"] = "Eb";
+  notes["Eb"] = "D#";
+  notes["F#"] = "Gb";
+  notes["Gb"] = "F#";
+  notes["G#"] = "Ab";
+  notes["Ab"] = "G#";
+  string note, tone;
+  int t = 1;
+  while (cin >> note >> tone) {
+    cout << "Case " << t++ << ": ";
+    if (notes.count(note)) {
+      cout << notes[note] << " " << tone << endl;
+    } else {
+      cout << "UNIQUE" << endl;
     }
+  }
+  return 0;
 }

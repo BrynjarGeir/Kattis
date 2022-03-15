@@ -1,48 +1,43 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include <algorithm>
 using namespace std;
-
+string solve(vector<int> col)   {
+	bool truth=true;
+	for(int i=0;i<col.size()-2;i++)
+	{
+		if(col[i+1]-col[i]!=col[i+2]-col[i+1])
+		{
+			truth=false;
+			break;
+		}
+	}
+	if(truth){return "arithmetic\n";}
+	else
+	{
+		sort(col.begin(),col.end());
+		bool truthd=true;
+		for(int i=0;i<col.size()-2;i++)
+		{
+			if(col[i+1]-col[i]!=col[i+2]-col[i+1])
+			{
+				truthd=false;
+				break;
+			}
+		}
+		if(truthd){return "permuted arithmetic\n";}
+		else{return "non-arithmetic\n";}
+	}
+}
 int main() {
-    int n, m;
-    cin >> n;
-
-    while(n--) {
-        cin >> m;
-        int seq[m], diff;
-        bool arithm = true;
-        cin >> seq[0] >> seq[1];
-        diff = seq[1] - seq[0];
-        for(int i = 2; i < m; i++) {
-            cin >> seq[i];
-            if(diff != seq[i] - seq[i-1]) {
-                arithm = false;
-                break;
-            }
-        }
-
-        if(arithm) {
-            cout << "arithmetic";
-            if(n != 0) cout << endl;
-            continue;
-        }
-
-        bool perm_arithm = true;
-        sort(seq, seq+m);
-        diff = seq[1] - seq[0];
-        for(int i = 2; i < m; i++) {
-            if(diff != seq[i] - seq[i-1]) {
-                perm_arithm = false;
-                break;
-            }
-        }
-
-        if(perm_arithm) {
-            cout << "permutated arithmetic";
-            if(n != 0) cout << endl;
-            continue;
-        }
-
-        cout << "non-arithmetic";
-        if(n != 0) cout << endl;
-    }
+	int tc;
+	cin>>tc;
+	for(int i=0;i<tc;i++)
+	{
+		int size,temp;
+		cin>>size;
+		vector<int> col;
+		for(int j=0;j<size;j++)
+		{cin>>temp;col.push_back(temp);}
+		cout<<solve(col);
+	}
 }

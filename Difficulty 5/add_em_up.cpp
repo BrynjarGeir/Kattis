@@ -22,14 +22,9 @@ int main() {
         bool cant_rotate = false;
         string new_number = "";
         for(char c: number)  {
-            if(c == '4' || c == '7') {
+            if(c == '3' || c== '4' || c == '7') {
                 cant_rotate = true;
                 break;
-            }
-            else if(c == '2') {
-                new_number += '5';
-            } else if(c == '5') {
-                new_number += '2';
             } else if(c == '6') {
                 new_number += '9';
             } else if(c == '9') {
@@ -38,12 +33,22 @@ int main() {
                 new_number += c;
             }
         }
+        reverse(new_number.begin(), new_number.end());
         cards.push_back(stoi(number));
         if(!cant_rotate) rotated_cards.push_back(stoi(new_number));
     }
 
+    for(int i: rotated_cards) {
+        if(find(cards.begin(), cards.end(), i) == cards.end()) {
+            cards.push_back(i);
+        }
+    }
     sort(cards.begin(), cards.end());
 
-    if(ls(cards, s, 0, cards.size() - 1) || ls(rotated_cards, s, 0, rotated_cards.size()-1)) cout << "YES";
+    for(int i: cards) {
+        cout << i << endl;
+    }
+
+    if(ls(cards, s, 0, cards.size() - 1)) cout << "YES";
     else cout << "NO";
 }

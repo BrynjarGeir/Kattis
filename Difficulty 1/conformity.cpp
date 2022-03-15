@@ -30,6 +30,11 @@ int main() {
         max_conformity = max(max_conformity, it->second);
     }
 
-    cout << max_conformity;
+    int total_conformity = 0;
+    for(it = courses.begin(); it != courses.end(); it++) {
+        if(it->second == max_conformity) total_conformity += it->second;
+    }
+
+    cout << total_conformity;
 
 }

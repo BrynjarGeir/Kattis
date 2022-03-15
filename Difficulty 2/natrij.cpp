@@ -1,44 +1,30 @@
 #include <iostream>
+
 using namespace std;
 
-int main() {
-    int hour_1, hour_2, minute_1, minute_2, second_1, second_2;
-    int diff_hour, diff_minute, diff_second;
-    string time_1, time_2;
+int main(){
+    int h1,m1,s1,h2,m2,s2;
+    char c;
+    cin >> h1 >> c >> m1 >> c >> s1 >> h2 >> c >> m2 >> c >> s2;
 
-    cin >> time_1 >> time_2;
+    int s = s2 - s1;
+    int m = m2 - m1;
+    int h = h2-h1;
 
-    hour_1 = stoi(time_1.substr(0,2)), minute_1 = stoi(time_1.substr(3,2)), second_1 = stoi(time_1.substr(6,2));
-    hour_2 = stoi(time_2.substr(0,2)), minute_2 = stoi(time_2.substr(3,2)), second_2 = stoi(time_2.substr(6,2));
-
-    if(hour_1 > hour_2) diff_hour = hour_2 + (24 - hour_1);
-    else diff_hour = hour_2 - hour_1;
-    diff_minute = minute_2 - minute_1;
-    if(diff_minute < 0) {
-        diff_hour--;
-        diff_minute += 60;
+    if(s < 0){
+        s += 60;
+        m -= 1;
     }
-    diff_second = second_2 - second_1;
-    if(diff_second < 0) {
-        diff_minute--;
-        diff_second += 60;
+    if(m < 0){
+        m += 60;
+        h -= 1;
+    }
+    if(h < 0){
+        h += 24;
     }
 
-    if(diff_hour + diff_minute + diff_minute == 0) diff_hour += 24;
-
-    string h, m, s;
-
-    if(diff_hour < 10) h = '0' + to_string(diff_hour);
-    else h = to_string(diff_hour);
-
-    if(diff_minute < 10) m ='0' + to_string(diff_minute);
-    else m = to_string(diff_minute);
-
-    if(diff_second < 10) s = '0' + to_string(diff_second);
-    else s = to_string(diff_second);
-
-    cout << h << ":" << m << ":" << s;
-
-
-
+    if(h+m+s == 0){
+        h += 24;
+    }
+    cout << (h<10 ? "0" : "") << h << ":" << (m<10 ? "0" : "") << m << ":" << (s<10 ? "0" : "") << s << endl;
 }
