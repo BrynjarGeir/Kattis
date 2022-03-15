@@ -2,25 +2,29 @@
 using namespace std;
 
 int main() {
-    long long N, B, H, W, p, b;
-    cin >> N >> B >> H >> W;
-    long long cheapest = INT32_MAX;
+    int participants, budget, hotels, weekends;
+    cin >> participants >> budget >> hotels >> weekends;
 
-    for(int i = 0; i < H; i++) {
-        cin >> p;
-        bool enough_rooms = false;
-        for(int j = 0; j < W; j++) {
-            cin >> b;
-            if(b >= N) {
-                enough_rooms = true;
-                break;
+    int bestprice = budget+1;
+
+    for(int i = 0; i < hotels; i++) {
+        int cost;
+        cin >> cost;
+
+        for(int j = 0; j < weekends; j++) {
+            int rooms;
+            cin >> rooms;
+
+            if(rooms >= participants) {
+                bestprice = min(bestprice, participants*cost);
             }
         }
-        if(enough_rooms) {
-            cheapest = min(cheapest,p);
-        }
     }
-    cheapest *= N;
-    if(cheapest <= B) cout << cheapest;
-    else cout << "stay home";
+
+    if(bestprice <= budget) {
+        cout << bestprice << endl;
+    }
+    else {
+        cout << "stay home" << endl;
+    }
 }
