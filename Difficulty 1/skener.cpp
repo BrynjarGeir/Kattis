@@ -6,9 +6,9 @@ int main() {
     cin >> R >> C >> ZR >> ZC;
     char new_grid[R*ZR][C*ZC];
 
-    for(int i = 0; i < R; i++) {
-        for(int j = 0; j < C; j++) {
-            for(int k = (i-1)*R)
+    for(int i = 0; i < ZR*R; i++) {
+        for(int j = 0; j < ZC*C; j++) {
+            if()
         }
     }
     
