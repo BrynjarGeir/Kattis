@@ -31,5 +31,6 @@ int main() {
                 if(weak) cout << i << " ";
             }
         }
+        cout << endl;
     }
 }
