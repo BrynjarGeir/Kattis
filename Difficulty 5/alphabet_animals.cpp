@@ -1,41 +1,31 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    string prev, curr;
+    string last_said, word;
     int n;
+    map<char, vector<string>> starts_with, ends_with;
+    vector<string> words;
 
-    cin >> prev;
-    cin >> n;
-    string words[n];
+    cin >> last_said >> n;
 
-    for(int i = 0; i < n; i++) {
-        cin >> words[i];
+    while(n--) {
+        cin >> word;
+        starts_with[word.front()].push_back(word);
+        ends_with[word.back()].push_back(word);
     }
 
-    int atleast_matches = -1;
-    for(int i = 0; i < n; i++) {
-        if(prev.back() == words[i].front()) {
-            atleast_matches = i;
-            bool not_right = false;
-            for(int j = 0; j < n; j++) {
-                if(i != j && words[i].back() == words[j].front()) {
-                    not_right = true;
-                }
-            }
-            if(!not_right) {
-                cout << words[i] << "!";
+    if(starts_with[last_said.back()].empty()) cout << '?';
+    else {
+        for(auto word: starts_with[last_said.back()]) {
+            if(ends_with[word.back()].empty()) {
+                cout << word << '!';
+                return 0;
+            } else if(word.front() == word.back() && starts_with[word.back()].size() == 1) {
+                cout << word << '!';
                 return 0;
             }
         }
+        cout << starts_with[last_said.back()].front();
     }
-
-    if(atleast_matches != -1) {
-        cout << words[atleast_matches];
-        return 0;
-    }
-
-    cout << "?";
-
-
 }

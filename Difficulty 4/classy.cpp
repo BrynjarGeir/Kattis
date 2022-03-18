@@ -3,30 +3,23 @@
 #include <vector>
 using namespace std;
 
-int cmpS(const pair<string, string> f, const pair<string, string> s) {
-    if (f.first.compare(s.first) == 0) {
-        cout << "Eventually " << f.second << " " << s.second << " " << (f.second.compare(s.second)) << endl;
-        return f.second.compare(s.second);
+int cmpS(pair<string, string> f, pair<string, string> s) {
+    for(int i = 0; i < min(f.first.size(), s.first.size()); i++) {
+        if((int)f.first.at(i) < (int)s.first.at(i)) return 1;
+        else if((int)f.first.at(i) > (int)s.first.at(i)) return 0;
     }
-    if(f.first.empty() && !s.first.empty()) {
-        for(char c: s.first) {
-            if(c == '1') return -1;
-            else if(c == '3') return 1;
+    if(f.first.size() > s.first.size()) {
+        for(int i = s.first.size(); i < f.first.size(); i++) {
+            if(f.first.at(i) == '1') return 1;
+            else if(f.first.at(i) == '3') return 0;
         }
-        return cmpS(make_pair("", f.second), make_pair("", s.second));
-    }
-    if(!f.first.empty() && s.first.empty()) {
-        for(char c: f.first) {
-            if(c == '1') return 1;
-            else if(c == '3') return -1;
+    } else {
+        for(int i = f.first.size(); i < s.first.size(); i++) {
+            if(s.first.at(i) == '1') return 0;
+            else if(s.first.at(i) == '3') return 1;
         }
-        return cmpS(make_pair("", f.second), make_pair("", s.second));
     }
-    if(f.first.front() == s.first.front()) {
-        pair<string, string> new_f = make_pair(f.first.substr(1), f.second), new_s = make_pair(s.first.substr(1), s.second);
-        return cmpS(new_f, new_s);
-    } else if (f.first.front() < s.first.front()) return -1;
-    else return 1;
+    return !f.second.compare(s.second);
 }
 
 int main() {
@@ -56,20 +49,13 @@ int main() {
             nc.push_back(make_pair(i, name.substr(0,name.size()-1)));
             cin >> line;
         }
-        /**
-        sort(nc.begin(), nc.end());
-        for(const pair<string, string> p: nc) {
-            cout << p.first << " " << p.second << endl;
-        }
-        cout << "==============================" << endl;
-        cout << cmpS(make_pair("2322", "unclebob"), make_pair("23222", "dad"));*/
-        vector<pair<string, string>> test;
-        test.push_back(make_pair("23222", "dad"));
-        test.push_back(make_pair("2322", "unclebob"));
-        sort(test.begin(), test.end(), cmpS);
-        for(auto p: test) {
+        
+        sort(nc.begin(), nc.end(), cmpS);
+        for(auto p: nc) {
             cout << p.second << endl;
         }
-        if(T != 0) cout << endl;
+        cout << "==============================" << endl;
+
+        //cout << cmpS({"23222", "dad"}, {"2322", "unclebob"}) << endl << cmpS({"111", "queen"}, {"2311", "mom"}) << endl << cmpS({"33", "chair"}, {"2311", "mom"});
     }
 }

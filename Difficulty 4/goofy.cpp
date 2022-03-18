@@ -8,7 +8,7 @@ int main() {
     cin >> N;
 
     for(int i = 0; i < N; i++) {
-        cin >> xi >> y;
+        cin >> xi >> yi;
         
     }
 }
