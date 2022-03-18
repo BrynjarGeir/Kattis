@@ -1,20 +1,5 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-
-int bs(int seq[], int target, int low, int high, int N) {
-    if(low >= high) return seq[low];
-    int mid = low + (high - low) / 2;
-    if(seq[mid] == target) return mid;
-
-}
-
-int cut(int seq[], int height, int N) {
-    int wood = 0;
-    for(int i = 0; i < N; i++) {
-        
-    }
-}
 
 int main() {
     int N, M;
@@ -25,10 +10,29 @@ int main() {
         cin >> heights[i];
     }
 
-    sort(heights, heights + N, greater<>());
+    sort(heights, heights + N);
 
-    int height = heights[0], wood = 0;
+    int low = 0, high = N;
+    bool been_higher = false, been_lower = false;
+    while(low < high) {
+        int mid = low + (high - low)/2;
+        cout << mid << endl;
+        int wood_cut = 0;
+        for(int i = 0; i < N; i++) {
+            wood_cut += max(0, heights[i] - heights[mid]);
+        }
+        cout << wood_cut << " " << M << endl;
+        if(wood_cut > M && been_lower) break; 
+        else if(wood_cut > M) {
+            high--;
+            been_higher = true;
+        } else if(wood_cut < M && been_higher) break;
+        else if(wood_cut < M) {
+            low++;
+            been_lower = true;
+        }
+        else break;
+    }
 
-    cout << height + 1;
-
+    cout << low << " " << high;
 }
