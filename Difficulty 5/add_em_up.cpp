@@ -3,11 +3,11 @@
 #include <algorithm>
 using namespace std;
 
-bool ls(vector<int> cards, int s, int low, int high) {
+bool ls(vector<pair<int, int>> cards, int s, int low, int high) {
     if(low >= high) return false;
-    if(cards[low] + cards[high] == s) return true;
-    if(cards[low] + cards[high] > s) return ls(cards, s, low, --high);
-    if(cards[low] + cards[high] < s) return ls(cards, s, ++low, high);
+    if(cards[low].second + cards[high].second == s && cards[low].first != cards[high].first) return true;
+    if(cards[low].second + cards[high].second > s) return ls(cards, s, low, --high);
+    if(cards[low].second + cards[high].second < s) return ls(cards, s, ++low, high);
     return false;
 }
 
@@ -15,7 +15,7 @@ int main() {
     int n, s;
     string number;
     cin >> n >> s;
-    vector<int> cards, rotated_cards;
+    vector<pair<int, int>> cards, rotated_cards;
 
     for(int i = 0; i < n; i++) {
         cin >> number;
@@ -34,20 +34,12 @@ int main() {
             }
         }
         reverse(new_number.begin(), new_number.end());
-        cards.push_back(stoi(number));
-        if(!cant_rotate) rotated_cards.push_back(stoi(new_number));
+        cards.push_back({stoi(number),i});
+        if(!cant_rotate) rotated_cards.push_back({stoi(new_number),i});
     }
 
-    for(int i: rotated_cards) {
-        if(find(cards.begin(), cards.end(), i) == cards.end()) {
-            cards.push_back(i);
-        }
-    }
+    for(auto i: rotated_cards) cards.push_back(i);
     sort(cards.begin(), cards.end());
-
-    for(int i: cards) {
-        cout << i << endl;
-    }
 
     if(ls(cards, s, 0, cards.size() - 1)) cout << "YES";
     else cout << "NO";

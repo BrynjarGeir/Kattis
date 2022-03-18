@@ -1,36 +1,28 @@
 #include <iostream>
 #include <algorithm>
-#include <set>
 #include <vector>
 using namespace std;
 
 int main() {
     vector<string> words;
-    set<string> compound_words;
     string word;
 
-    while (getline(cin, word)) {
-        if (word == "") break;
+    while(cin >> word) {
         words.push_back(word);
     }
-
-    for (int i = 0; i < words.size(); i++) {
-        for (int j = 0; j < words.size(); i++) {
-            if (i == j) continue;
-            compound_words.insert(words[i] + words[j]);
+    vector<string> compound_words;
+    for(int i = 0; i < words.size(); i++) {
+        for(int j = 0; j < words.size(); j++) {
+            if(i == j) continue;
+            compound_words.push_back(words.at(i) + words.at(j));
         }
     }
-    vector<string> ans;
-    auto it = compound_words.begin();
-    while (it != compound_words.end()) {
-        ans.push_back(*it);
-        it++;
-    }
 
-    sort(ans.begin(), ans.end());
-    
-    for (int i = 0; i < ans.size(); i++) {
-        cout << ans[i] << endl;
-    }
+    sort(compound_words.begin(), compound_words.end());
 
+    cout << compound_words.front() << endl;
+    for(int i = 1; i < compound_words.size(); i++) {
+        if(compound_words.at(i) == compound_words.at(i-1)) continue;
+        cout << compound_words.at(i) << endl;
+    }
 }
