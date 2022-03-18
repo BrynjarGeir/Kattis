@@ -5,6 +5,9 @@
         "random": "cpp",
         "*.tcc": "cpp",
         "cmath": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "ostream": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
     }
 }
