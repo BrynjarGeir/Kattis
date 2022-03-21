@@ -6,5 +6,11 @@ int main() {
     cin >> stones;
     int black = 0, white = 0;
 
-    for(in t)
+    for(char c: stones) {
+        if(c == 'W') white++;
+        else black++;
+    }
+
+    if(white == black) cout << 1;
+    else cout << 0;
 }
