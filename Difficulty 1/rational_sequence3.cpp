@@ -4,7 +4,7 @@ using namespace std;
 
 int frac[] = {0, 1};
 
-int nthRational(int n) {
+void nthRational(int n) {
     if (n > 0) nthRational(n/2);
     frac[~n & 1] += frac[n & 1];
 }
@@ -17,5 +17,8 @@ int main() {
         cin >> K >> N;
         nthRational(N);
         cout << K << " " << frac[0] << "/" << frac[1] << endl;
+        frac[0] = 0, frac[1] = 1;
     }
+
+    return 0;
 }
