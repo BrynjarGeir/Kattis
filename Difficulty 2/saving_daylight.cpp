@@ -14,7 +14,7 @@ int main() {
         set_minutes = stoi(sunset.substr(pos_sunset+1));
         if (set_minutes >= rise_minutes) {
             diff_hours = set_hours - rise_hours;
-            diff_minutes = set_minutes - set_hours;
+            diff_minutes = set_minutes - rise_minutes;
         } else {
             diff_hours = set_hours - rise_hours -1;
             diff_minutes = 60 - rise_minutes + set_minutes;

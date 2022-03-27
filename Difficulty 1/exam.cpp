@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    int friend_correct, mine_correct = 0, questions, matching = 0;
+    int friend_correct, mine_correct, questions, matching = 0;
     string mine, his;
     
     cin >> friend_correct;
@@ -17,6 +17,8 @@ int main() {
         }
     }
 
-    mine_correct += questions - matching;
+    mine_correct = questions - friend_correct + matching;
+
+    cout << min(questions, mine_correct);
 
 }

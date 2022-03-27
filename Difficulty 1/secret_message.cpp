@@ -3,19 +3,19 @@
 using namespace std;
 
 int main() {
-    int N;
-    string to_encrypt, encrypted;
+    int N, l;
+    string em, dm;
+
     cin >> N;
 
-    for(int i = 0; i < N; i++) {
-        cin >> to_encrypt;
-        encrypted = "";
-        int M = pow(ceil(sqrt(to_encrypt.size())),2);
-        int grid[M][M];
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < M; j++) {
-                to_encrypt.p
-            }
+    while(N--) {
+        cin >> em;
+        l = em.size();
+        int m = floor(pow(ceil(sqrt(l)), 2)), n = ceil(sqrt(l)), pos = 0;
+        dm = "";
+        while(dm.size() != m) {
+            dm += em.at(pos);
+            pos += 
         }
     }
 }

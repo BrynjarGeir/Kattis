@@ -2,14 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
-#include <map>
 using namespace std;
 
 bool cmp2dchar(char first[5][3], char second[5][3]) {
     for(int i = 0; i < 5; i++) {
         for(int j = 0; j < 5; j++) {
             if(first[i][j] != second[i][j]) {
-                cout << first[i][j] << " " << second[i][j] << endl;
+                cout << i << " " << j << " " << first[i][j] << " " << second[i][j] << " what is happening!" << endl;                
                 return false;
             }
         }
@@ -72,19 +71,8 @@ int main() {
         }
 
         if(!is_number) {
+            cout << cmp2dchar(curr_symbol, zero) << endl;
             cout << "BOOM!!" << endl;
-            for(int i = 0; i < 5; i++) {
-                for(int j = 0; j < 3; j++) {
-                    cout << curr_symbol[i][j];
-                }
-                cout << endl;
-            }
-            for(int i = 0; i < 5; i++) {
-                for(int j = 0; j < 3; j++) {
-                    cout << zero[i][j];
-                }
-                cout << endl;
-            }
             return 0;
         }
         number *= 10;
