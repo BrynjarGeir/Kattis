@@ -1,18 +1,18 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 int main() {
-    int N, prev = -1, curr;
-    cin >> N;
+    int N, A, B;
 
+    cin >> N >> A;
+    N--;
     while(N--) {
-        if(prev = -1) cin >> prev;
-        else {
-            cin >> curr;
-            cout << curr / prev;
-            prev = curr / prev;
-            if(N != 0) cout << endl;
-        }
+        cin >> B;
+        int g = __gcd(A, B);
+        int a = A / g;
+        B /= g;
+        cout << a << '/' << B << endl;
     }
-
+    
 }

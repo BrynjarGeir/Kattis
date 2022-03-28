@@ -1,35 +1,30 @@
 #include <iostream>
-#include <vector>
-#include <map>
 using namespace std;
 
 int main() {
-    int n, p;
-    while(cin >> n && n != -1) {
-        map<int, vector<int>> connections;
+    int N = 100, n;
+    while(N-- && cin >> n && n != -1) {
+        bool graph[n][n];
+
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
-                cin >> p;
-                if(p == 1) {
-                    connections[i].push_back(j);
-                }
+                cin >> graph[i][j];
             }
         }
+
         for(int i = 0; i < n; i++) {
-            if(connections.at(i).size() < 2) cout << i << " ";
-            else {
-                bool weak = true;
-                for(int j = 0; j < connections.at(i).size(); j++) {
-                    for(int k = 0; k < connections.at(i).size(); k+++) {
-                        if(k != j && connections[connections[i].at(k)].find(j)) {
-                            weak = false;
-                            break;
-                        }
+            bool weak = true, already = false;
+            for(int j = 0; j < n; j++) {
+                for(int k = 0; k < n; k++) {
+                    if(graph[i][j] && graph[j][k] && graph[k][i] && i != j && j != k && i != k) {
+                        weak = false;
+                        already = true;
+                        break;
                     }
-                    if(!weak) break;
                 }
-                if(weak) cout << i << " ";
+                if(already) break;
             }
+            if(weak) cout << i << " ";
         }
         cout << endl;
     }
