@@ -4,26 +4,24 @@
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
-    vector<int> days(n);
+    int N;
+    cin >> N;
+    vector<int> seedlings(N);
 
-    for(int i = 0; i < n; i++) {
-        cin >> days[i];
-    }
+    for(int i = 0; i < N; i++) cin >> seedlings[i];
 
-    sort(days.begin(), days.end());
-
-    int longest = days[0], ans = 1;
-
-    for(int i = 1; i < n; i++) {
-        longest--, ans++;
-        if(longest < days[i]) {
-            longest = days[i];
+    sort(seedlings.begin(), seedlings.end(), greater<int>());
+    int l = seedlings[0], days = 1;
+    for(int i = 1; i < N; i++) {
+        l--, days++;
+        if(seedlings[i] > l) {
+            l = seedlings[i];
         }
     }
+    days += l;
+    cout << days + 1;
 
-    ans += longest;
 
-    cout << ans + 1;
+
+
 }

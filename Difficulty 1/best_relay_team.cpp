@@ -1,47 +1,43 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
 #include <algorithm>
 using namespace std;
 
-int main(){
+int main() {
+    cout << fixed << setprecision(9);
     int n;
-    double fl, sl;
-    string name;
-    vector<pair<double, string>> first, second;
     cin >> n;
+    string name;
+    double tf, ts;
+    vector<pair<double, string>> first, second;
 
-    for(int i = 0; i < n; i++) {
-        cin >> name >> fl >> sl;
-        first.push_back({fl, name});
-        second.push_back({sl, name});
+    while(n--) {
+        cin >> name >> tf >> ts;
+        first.push_back({tf, name});
+        second.push_back({ts, name});
     }
 
     sort(first.begin(), first.end());
     sort(second.begin(), second.end());
 
-    int min_time = INT32_MAX;
-    vector<pair<double, string>> answer;
+    double min_time = INT32_MAX;
+    vector<string> answer;
 
     for(int i = 0; i < 4; i++) {
-        vector<pair<double, string>> curr_ans;
-        curr_ans.push_back(first.at(i));
-        vector<string> names;
-        names.push_back(first.at(i).second);
-        int j = 0;
-        double curr_time = 0;
-        while(curr_ans.size() < 4) {
-            if(find(names.begin(), names.end(), second.at(j).second) == names.end()) {
-                curr_ans.push_back(second.at(j));
-                names.push_back(second.at(j).second);
-                curr_time += second.at(j).first;
+        vector<string> current_names;
+        current_names.push_back(first.at(i).second);
+        double curr_time = first.at(i).first;
+        int pos = 0;
+        while(current_names.size() < 4) {
+            if(find(current_names.begin(), current_names.end(), second.at(pos).second) == current_names.end()) {
+                current_names.push_back(second.at(pos).second);
+                curr_time += second.at(pos).first;
             }
-            j++;
+            pos++;
         }
-        if(curr_time < min_time) {
-            min_time = curr_time;
-            answer = curr_ans;
-        }
+        if(curr_time < min_time) {min_time = curr_time; answer = current_names;}
     }
 
-    cout << min_time;
+    cout << min_time << endl << answer.at(0) << endl << answer.at(1) << endl << answer.at(2) << endl << answer.at(3);
 }

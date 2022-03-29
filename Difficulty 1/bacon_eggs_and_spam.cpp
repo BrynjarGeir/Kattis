@@ -1,4 +1,6 @@
 #include <iostream>
+#include <algorithm>
+#include <sstream>
 #include <map>
 #include <vector>
 using namespace std;
@@ -7,23 +9,22 @@ int main() {
     int n;
     while(cin >> n && n != 0) {
         cin.ignore();
-        map<string, vector<string>> ords;
+        map<string, vector<string>> who_ordered;
         string line;
-        for(int i = 0; i < n; i++) {
+        while(n--) {
             getline(cin, line);
-            string cust = line.substr(0, line.find(' '));
-            line = line.substr(line.find(' ')+1);
-            while(!line.empty()) {
-                string item = line.substr(0,line.find(' '));
-                ords[item].push_back(cust);
-                line = line.substr(line.find(' ')+1);
+            istringstream ss(line);
+            string name, item;
+            ss >> name;
+            while(ss >> item) {
+                who_ordered[item].push_back(name);
             }
         }
-        map<string, vector<string>>::iterator it;
-        for(it = ords.begin(); it != ords.end(); it++) {
-            cout << it->first << " ";
-            for(int i = 0; i < it->second.size(); i++) {
-                cout << it->second.at(i) << " ";
+        for(auto p: who_ordered) {
+            cout << p.first << " ";
+            sort(p.second.begin(), p.second.end());
+            for(auto name: p.second) {
+                cout << name << " ";
             }
             cout << endl;
         }

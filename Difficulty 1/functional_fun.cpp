@@ -1,33 +1,44 @@
 #include <iostream>
-#include <set>
 #include <sstream>
+#include <map>
 using namespace std;
 
 int main() {
-    int n;
-    string domain, codomain;
+    string dom, codom;
 
-    while(getline(cin, domain)) {
-        domain = domain.substr(8);
-        istringstream iss(domain);
-        set<string> d, cd;
-        string word;
-        while(iss >> word) {
-            d.insert(word);
-        }
-        getline(cin, codomain);
-        codomain = codomain.substr(10);
-        iss(codomain);
-        while(iss >> word) {
-            cd.insert(word);
-        }
+    while(getline(cin, dom) && getline(cin, codom)) {
+        istringstream sd(dom), sc(codom);
+        map<string, int> domain, codomain;
+        map<string, string> mapping;
+        string word, f, a, t;
+        sd >> word, sc >> word;
+        bool bijective = true, surjective = true, injective = true, function = true;
+        while(sd >> word) domain[word] = 0;
+        while(sc >> word) codomain[word] = 0;
 
-        cin >> n;
-        cin.ignore();
+        getline(cin, word);
+        int proj = stoi(word);
 
-        while(n--) {
+        for(int i = 0; i < proj; i++) {
             getline(cin, word);
-            
+            istringstream ss(word);
+            ss >> f >> a >> t;
+            domain[f]++;
+            codomain[t]++;
         }
+
+        for(auto c: domain) if(c.second > 1) function = false;
+        if(!function) {cout << "not a function" << endl; continue;}
+        for(auto c: codomain) {
+            if(c.second != 1) bijective = false;
+            if(c.second > 1) injective = false;
+            if(c.second == 0) surjective = false;
+        }
+
+
+        if(bijective) cout << "bijective" << endl;
+        else if(injective) cout << "injective" << endl;
+        else if(surjective) cout << "surjective" << endl;
+        else cout << "neither injective nor surjective" << endl;
     }
 }
