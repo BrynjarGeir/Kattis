@@ -1,10 +1,12 @@
-#include <iostream>
 #include <map>
-
+#include <sstream>
+#include <iostream>
 using namespace std;
 
 int main() {
     string line;
 
-    getline(cin, line);
+    while(getline(cin, line) && line != "0") {
+        
+    }
 }
