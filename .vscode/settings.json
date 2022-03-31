@@ -9,6 +9,7 @@
         "ostream": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "algorithm": "cpp"
     }
 }
