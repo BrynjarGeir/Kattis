@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 int main() {
@@ -9,21 +8,28 @@ int main() {
 
     while(T--) {
         cin >> N >> word;
-        bool right = true;
-
+        int size = word.size();
+        bool right = false, cut[size];
+        if(size < 4) {cout << word << endl; continue;}
         for(int i = 0; i < N; i++) {
-            if(!right) {
-                word = word.substr(0, word.size() - word.size() / 4);
+            int ct = size / 4;
+            if(right) {
+                for(int i = size-1; i >= size - 1 - ct; i--) {
+                    cut[i] = true;
+                }
             } else {
-                word = word.substr(word.size() / 4);
+                int pos = 0;
+                while(cut[pos] && i < size) pos++;
+                for(int i = pos; i < pos + ct; i++) {
+                    cut[i] = true;
+                }
             }
-
+            size -= ct;
             right = !right;
         }
-
-        cout << word;
-        if(T != 0) cout << endl;
+        for(int i = 0; i < word.size(); i++) {
+            if(!cut[i]) cout << word.at(i);
+        }
+        cout << endl;
     }
-
-
 }

@@ -7,6 +7,6 @@ int main() {
     cin >> n;
 
     double ans = pow(n, 4) - 6 * pow(n, 3) + 11 * pow(n, 2) - 6 * n;
-    ans /= 24;
+    ans /= 24.0;
     cout << ans;
 }

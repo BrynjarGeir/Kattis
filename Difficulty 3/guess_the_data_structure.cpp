@@ -5,42 +5,53 @@
 using namespace std;
 
 int main() {
-    int n, c, num;
+    int n, command, value;
 
-    while(scanf("%d", &n) != EOF) {
-        if(n == 1 && cin >> c && c == 2) {
-            cout << "impossible" << endl;
-            continue;
-        } else if(n == 1) {
-            cout << "not sure";
-            continue;
-        }
-        stack<int> st;
+    while(cin >> n) {
         queue<int> q;
         priority_queue<int> pq;
-        bool could_be_stack = true, could_be_queue = true, could_be_pq = true;
+        stack<int> st;
+        bool isQ = true, isPQ = true, isSt = true;
 
-        while(n--) {
-            cin >> c >> num;
-            if(c == 1) {
-                st.push(num);
-                q.push(num);
-                pq.push(num); 
-            } else {
-                if(could_be_stack && st.top() != num) could_be_stack = false;
-                if(could_be_queue && q.front() != num) could_be_queue = false;
-                if(could_be_pq && pq.top() != num) could_be_pq = false;
-                st.pop(), q.pop(), pq.pop();
+        for(int i = 0; i < n; i++) {
+            cin >> command >> value;
+
+            switch (command)
+            {
+            case 1:
+                if(isQ) q.push(value);
+
+                if(isPQ) pq.push(value);
+
+                if(isSt) st.push(value);
+
+                break;
+            
+            case 2:
+                if(isQ) {
+                    if(q.empty() || q.front() != value) {
+                        isQ = false;
+                    } else q.pop();
+                }
+
+                if(isPQ) {
+                    if(pq.empty() || pq.top() != value) {
+                        isPQ = false;
+                    } else pq.pop();
+                }
+
+                if(isSt) {
+                    if(st.empty() || st.top() != value) {
+                        isSt = false;
+                    } else st.pop();
+                }
+                break;
             }
         }
-
-        if(!could_be_pq && !could_be_queue && !could_be_stack) cout << "impossible";
-        else if((could_be_pq && could_be_queue) || (could_be_queue && could_be_stack) || (could_be_pq && could_be_stack)) cout << "not sure";
-        else if(could_be_pq) cout << "priority queue";
-        else if(could_be_queue) cout << "queue";
-        else if(could_be_stack) cout << "stack";
-
-        cout << endl;
-
+        if(isQ && !isPQ && !isSt) cout << "queue" << endl;
+        else if(!isQ && isPQ && !isSt) cout << "priority queue" << endl;
+        else if(!isQ && !isPQ && isSt) cout << "stack" << endl;
+        else if(!isQ && !isPQ && !isSt) cout << "impossible" << endl;
+        else cout << "not sure" << endl;
     }
 }
