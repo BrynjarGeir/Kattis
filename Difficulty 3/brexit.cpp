@@ -1,29 +1,43 @@
 #include <iostream>
+#include <algorithm>
 #include <map>
-#include <vector>
+#include <set>
 using namespace std;
 
 int main() {
     int C, P, X, L, A, B;
-    map<int, pair<int, vector<int>>> trades;
-
     cin >> C >> P >> X >> L;
-    if(X == L) {
-        cout << "leave";
-        return 0;
-    }
+
+    map<int, set<int>> countries;
+    map<int, int> initial_partnerships;
 
     for(int i = 0; i < P; i++) {
         cin >> A >> B;
-        trades[A].first++;
-        trades[A].second.push_back(B);
-        trades[B].first[++];
-        trades[B].second.push_back(A);
+        if(A != L) initial_partnerships[A]++;
+        if(B != L) initial_partnerships[B]++;
+        if(A != L && B != L) {
+            countries[A].insert(B);
+            countries[B].insert(A);
+        }
     }
 
-    while(C) {
-        map<int, pair<int, vector<int>>>::iterator it;
-        int leave = L;
-        for(it = trades.begin(); )
+    bool change = true;
+    while(change) {
+        change = false;
+        for(auto c: countries) {
+            if(2 * c.second.size() < initial_partnerships[c.first]) {
+                for(auto k: countries) {
+                    if(k.first != c.first) k.second.erase(c.first);
+                }
+                change = true;
+            }
+        }
     }
+
+    if(2 * countries[X].size() <= initial_partnerships[X]) cout << "leave";
+    else cout << "stay";
+    cout << endl;
+    for(auto c: countries[X]) {cout << c << " ";}
+    cout << endl;
+    cout << countries[X].size() << " " << initial_partnerships[X];
 }
